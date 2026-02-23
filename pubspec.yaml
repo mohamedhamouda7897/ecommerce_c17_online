@@ -1,0 +1,40 @@
+name: ecommerce_c17_online
+description: "A new Flutter project."
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.11.0
+dependencies:
+  cached_network_image:
+  carousel_slider_plus:
+  flutter:
+    sdk: flutter
+  flutter_screenutil:
+  flutter_slidable:
+  auto_size_text:
+  colornames:
+  flutter_svg:
+  flutter_native_splash:
+  readmore:
+  smooth_page_indicator:
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^6.0.0
+flutter:
+  generate: true
+  uses-material-design: true
+  assets:
+    - assets/images/
+    - assets/icons/
+    - assets/svg_images/
+
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/Poppins-.ttf
+
+
