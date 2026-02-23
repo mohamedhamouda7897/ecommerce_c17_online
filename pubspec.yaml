@@ -6,6 +6,13 @@ version: 1.0.0+1
 environment:
   sdk: ^3.11.0
 dependencies:
+  dio: ^5.9.1
+  pretty_dio_logger: ^1.4.0
+  bloc: ^9.2.0
+  flutter_bloc: ^9.1.1
+  loader_overlay: ^5.0.0
+  get_it: ^9.2.1
+  injectable: ^2.7.1+4
   cached_network_image:
   carousel_slider_plus:
   flutter:
@@ -24,6 +31,8 @@ dev_dependencies:
     sdk: flutter
 
   flutter_lints: ^6.0.0
+  injectable_generator: ^2.12.0
+  build_runner: ^2.11.1
 flutter:
   generate: true
   uses-material-design: true

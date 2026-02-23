@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class AppConstants {
   static const String delete = "Delete";
+  static const String baseURl = "https://ecommerce.routemisr.com/api/v1";
   static const String searchHint = "what do you search for?";
   static const String addToCart = "Add to Cart";
 
