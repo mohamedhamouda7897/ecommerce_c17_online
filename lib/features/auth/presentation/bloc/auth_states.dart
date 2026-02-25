@@ -33,6 +33,7 @@ class AuthStates {
       errorMessage: errorMessage ?? this.errorMessage,
       signUpRequestStatus: signUpRequestStatus ?? this.signUpRequestStatus,
       signUpResponse: signUpResponse ?? this.signUpResponse,
+      signUpErrorMessage: signUpErrorMessage ?? this.signUpErrorMessage,
     );
   }
 }

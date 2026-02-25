@@ -1,3 +1,4 @@
+import 'package:ecommerce_c17_online/core/error_handling/exceptions.dart';
 import 'package:ecommerce_c17_online/features/auth/data/data_sources/remote/auth_remote_ds.dart';
 import 'package:ecommerce_c17_online/features/auth/data/models/AuthResponse.dart';
 import 'package:ecommerce_c17_online/features/auth/domain/entity/SignUpRequest.dart';
@@ -26,7 +27,7 @@ class AuthRepoImpl implements AuthRepository {
       AuthResponse response = await authRemoteDs.signUp(request);
       return response;
     } catch (e) {
-      throw Exception("Auth Failed");
+      throw AuthException(message: "Auth Failed");
     }
   }
 }

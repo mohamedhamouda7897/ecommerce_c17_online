@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:ecommerce_c17_online/core/error_handling/exceptions.dart';
 import 'package:ecommerce_c17_online/features/auth/domain/usecases/login_usecase.dart';
 import 'package:ecommerce_c17_online/features/auth/domain/usecases/signUp_usecase.dart';
 import 'package:ecommerce_c17_online/features/auth/presentation/bloc/auth_events.dart';
@@ -32,24 +33,29 @@ class AuthBloc extends Bloc<AuthEvents, AuthStates> {
         );
       }
     });
-    on<SignUpEvent>((event, emit) async{
+    on<SignUpEvent>((event, emit) async {
       emit(state.copyWith(signUpRequestStatus: RequestStatus.loading));
       try {
-
         var response = await signupUseCase.call(event.request);
 
         emit(
           state.copyWith(
-            loginRequestStatus: RequestStatus.success,
-            authResponse: response,
+            signUpRequestStatus: RequestStatus.success,
+            signUpResponse: response,
           ),
         );
-
+      } on BaseException catch (e) {
+        emit(
+          state.copyWith(
+            signUpRequestStatus: RequestStatus.failure,
+            signUpErrorMessage: e.message,
+          ),
+        );
       } catch (e) {
         emit(
           state.copyWith(
             signUpRequestStatus: RequestStatus.failure,
-            signUpErrorMessage: "Something went wrong",
+            signUpErrorMessage: e.toString(),
           ),
         );
       }
