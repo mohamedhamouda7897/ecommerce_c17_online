@@ -35,6 +35,8 @@ class SubCategoryItem extends StatelessWidget {
           ),
           Text(
             title,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
             style: getRegularStyle(color: ColorManager.primary),
           )
         ],

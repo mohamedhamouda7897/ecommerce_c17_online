@@ -14,8 +14,8 @@ class AuthException extends BaseException {
   AuthException({String? message, String? code}) : super(message: message);
 }
 
-class ServerException extends BaseException {
-  ServerException([String? message]) : super(message: message);
+class ServerRouteException extends BaseException {
+  ServerRouteException([String? message]) : super(message: message);
 }
 
 class NoInternetException extends BaseException {
