@@ -1,3 +1,4 @@
+import 'package:ecommerce_c17_online/core/routes_manager/routes.dart';
 import 'package:ecommerce_c17_online/core/widget/custom_elevated_button.dart';
 import 'package:ecommerce_c17_online/di.dart';
 import 'package:ecommerce_c17_online/features/auth/domain/entity/SignUpRequest.dart';
@@ -42,6 +43,13 @@ class SignUpScreen extends StatelessWidget {
               );
             }
 
+            if (state.signUpRequestStatus == RequestStatus.success) {
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                Routes.mainRoute,
+                    (route) => false,
+              );
+            }
             if (state.signUpRequestStatus == RequestStatus.loading) {
               context.loaderOverlay.show();
             } else {
