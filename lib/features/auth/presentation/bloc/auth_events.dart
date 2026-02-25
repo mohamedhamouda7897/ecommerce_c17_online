@@ -1,3 +1,5 @@
+import 'package:ecommerce_c17_online/features/auth/domain/entity/SignUpRequest.dart';
+
 abstract class AuthEvents {}
 
 class LoginEvent extends AuthEvents {
@@ -7,5 +9,8 @@ class LoginEvent extends AuthEvents {
   LoginEvent(this.userName, this.password);
 }
 
+class SignUpEvent extends AuthEvents {
+  SignUpRequest request;
 
-class C extends AuthEvents{}
+  SignUpEvent(this.request);
+}
