@@ -71,7 +71,7 @@ class _HomeTabState extends State<HomeTab> {
                       function: () {},
                     ),
                     SizedBox(
-                      height: 270.h,
+                      height: 280.h,
                       child: GridView.builder(
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {

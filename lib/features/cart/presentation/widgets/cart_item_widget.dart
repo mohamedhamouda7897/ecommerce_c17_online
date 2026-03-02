@@ -4,7 +4,7 @@ import 'package:ecommerce_c17_online/core/resources/styles_manager.dart';
 import 'package:ecommerce_c17_online/core/resources/values_manager.dart';
 import 'package:ecommerce_c17_online/core/routes_manager/routes.dart';
 import 'package:ecommerce_c17_online/core/widget/product_counter.dart';
-import 'package:ecommerce_c17_online/features/cart/widgets/color_and_size_cart_item.dart';
+import 'package:ecommerce_c17_online/features/cart/presentation/widgets/color_and_size_cart_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

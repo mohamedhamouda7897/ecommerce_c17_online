@@ -30,31 +30,37 @@ class SubCategoriesList extends StatelessWidget {
                 child: Text(
                   'Laptops & Electronics',
                   style: getBoldStyle(
-                      color: ColorManager.primary, fontSize: FontSize.s14),
+                    color: ColorManager.primary,
+                    fontSize: FontSize.s14,
+                  ),
                 ),
               ),
               // the category card
               SliverToBoxAdapter(
-                child: CategoryCardItem("Laptops & Electronics",
-                    ImageAssets.categoryCardImage,
-                    goToCategoryProductsListScreen),
+                child: CategoryCardItem(
+                  "Laptops & Electronics",
+                  ImageAssets.categoryCardImage,
+                  goToCategoryProductsListScreen,
+                ),
               ),
               // the grid view of the subcategories
               SliverGrid(
-                  delegate: SliverChildBuilderDelegate(
-                    childCount: state.subCategoryModel?.results??0,
-                        (context, index) =>
-                        SubCategoryItem(
-                            state.subCategoryModel?.data?[index].name??"",
-                            ImageAssets.subcategoryCardImage,
-                            goToCategoryProductsListScreen),
+                delegate: SliverChildBuilderDelegate(
+                  childCount: state.subCategoryModel?.data?.length ?? 0,
+                  (context, index) => SubCategoryItem(
+                    state.subCategoryModel?.data?[index].name ?? "",
+                    ImageAssets.subcategoryCardImage,
+                    goToCategoryProductsListScreen,
+                    state.categoryModel?.data?[state.selectedIndex].id ?? "",
                   ),
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
-                    childAspectRatio: 0.75,
-                    mainAxisSpacing: AppSize.s8,
-                    crossAxisSpacing: AppSize.s8,
-                  ))
+                ),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                  childAspectRatio: 0.75,
+                  mainAxisSpacing: AppSize.s8,
+                  crossAxisSpacing: AppSize.s8,
+                ),
+              ),
             ],
           ),
         );

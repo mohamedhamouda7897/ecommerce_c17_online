@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:ecommerce_c17_online/core/caching/cache_helper.dart';
 import 'package:ecommerce_c17_online/core/routes_manager/routes.dart';
 import 'package:ecommerce_c17_online/core/routes_manager/routes.dart';
 import 'package:ecommerce_c17_online/di.dart';
@@ -9,17 +10,20 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'core/routes_manager/route_generator.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  configureDependencies();
-  runApp(const MainApp());
+  await configureDependencies();
+  runApp(MainApp());
 }
 
 class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+  MainApp({super.key});
+
+  final cacheHelper = getIt<CacheHelper>();
 
   @override
   Widget build(BuildContext context) {
+    String? token = cacheHelper.getString('token');
     return ScreenUtilInit(
       designSize: const Size(430, 932),
       minTextAdapt: true,
@@ -28,7 +32,7 @@ class MainApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         home: child,
         onGenerateRoute: RouteGenerator.getRoute,
-        initialRoute: Routes.signInRoute,
+        initialRoute: token != null ? Routes.mainRoute : Routes.signInRoute,
       ),
     );
   }

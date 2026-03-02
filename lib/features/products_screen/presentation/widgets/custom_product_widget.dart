@@ -1,7 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ecommerce_c17_online/core/resources/color_manager.dart';
 import 'package:ecommerce_c17_online/core/resources/styles_manager.dart';
 import 'package:ecommerce_c17_online/core/routes_manager/routes.dart';
 import 'package:ecommerce_c17_online/core/widget/heart_button.dart';
+import 'package:ecommerce_c17_online/features/products_screen/data/models/ProductResponse.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -14,10 +16,12 @@ class CustomProductWidget extends StatelessWidget {
   final double price;
   final double discountPercentage;
   final double rating;
+  final Data product;
 
   const CustomProductWidget({
     super.key,
     required this.width,
+    required this.product,
     required this.height,
     required this.image,
     required this.title,
@@ -48,7 +52,9 @@ class CustomProductWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => Navigator.pushNamed(context, Routes.productDetails),
+      onTap: () => Navigator.pushNamed(context, Routes.productDetails,
+      arguments: product
+      ),
       child: Container(
         width: width * 0.4,
         height: height * 0.3,
@@ -69,28 +75,28 @@ class CustomProductWidget extends StatelessWidget {
                 children: [
                   // Not working with the lastest flutter version
 
-                  // CachedNetworkImage(
-                  //   imageUrl: image,
-                  //   height: height * 0.15,
-                  //   width: double.infinity,
-                  //   fit: BoxFit.cover,
-                  //   placeholder: (context, url) =>
-                  //       const Center(child: CircularProgressIndicator()),
-                  //   errorWidget: (context, url, error) => const Icon(Icons.error),
-                  // ),
+                  CachedNetworkImage(
+                    imageUrl: image,
+                    height: height * 0.15,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                    placeholder: (context, url) =>
+                        const Center(child: CircularProgressIndicator()),
+                    errorWidget: (context, url, error) => const Icon(Icons.error),
+                  ),
                   // Image.network(
                   //   image,
                   //   fit: BoxFit.cover,
                   // ),
-                  ClipRRect(
-                    borderRadius:
-                        BorderRadius.vertical(top: Radius.circular(14.r)),
-                    child: Image.asset(
-                      image,
-                      fit: BoxFit.cover,
-                      width: width,
-                    ),
-                  ),
+                  // ClipRRect(
+                  //   borderRadius:
+                  //       BorderRadius.vertical(top: Radius.circular(14.r)),
+                  //   child: Image.asset(
+                  //     image,
+                  //     fit: BoxFit.cover,
+                  //     width: width,
+                  //   ),
+                  // ),
                   Positioned(
                       top: height * 0.01,
                       right: width * 0.02,

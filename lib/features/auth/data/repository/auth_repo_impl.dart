@@ -1,3 +1,4 @@
+import 'package:ecommerce_c17_online/core/caching/cache_helper.dart';
 import 'package:ecommerce_c17_online/core/error_handling/exceptions.dart';
 import 'package:ecommerce_c17_online/features/auth/data/data_sources/remote/auth_remote_ds.dart';
 import 'package:ecommerce_c17_online/features/auth/data/models/AuthResponse.dart';
@@ -9,12 +10,17 @@ import 'package:injectable/injectable.dart';
 class AuthRepoImpl implements AuthRepository {
   AuthRemoteDs authRemoteDs;
 
-  AuthRepoImpl(this.authRemoteDs);
+  CacheHelper _cacheHelper;
+
+  AuthRepoImpl(this.authRemoteDs, this._cacheHelper);
 
   @override
   Future<AuthResponse> login(String username, String password) async {
     try {
       AuthResponse response = await authRemoteDs.login(username, password);
+
+      await _cacheHelper.setString('token', response.token ?? "");
+
       return response;
     } catch (e) {
       rethrow;

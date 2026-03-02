@@ -13,7 +13,7 @@ class HomeRemoteDsImpl implements HomeRemoteDs {
   @override
   Future<CategoryModel> getCategories() async {
     try {
-      var response = await apiManager.get(Endpoints.subcategories);
+      var response = await apiManager.get(Endpoints.categories);
       return CategoryModel.fromJson(response.data);
     } catch (e) {
       rethrow;

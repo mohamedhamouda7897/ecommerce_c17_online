@@ -10,6 +10,9 @@ abstract class BaseException implements Exception {
   }
 }
 
+class GeneralException extends BaseException {
+  GeneralException({String? message, String? code}) : super(message: message);
+}
 class AuthException extends BaseException {
   AuthException({String? message, String? code}) : super(message: message);
 }
