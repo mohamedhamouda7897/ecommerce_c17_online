@@ -25,7 +25,9 @@ class ProductsScreen extends StatelessWidget {
         listener: (context, state) {},
         builder: (context, state) {
           return Scaffold(
-            appBar: const HomeScreenAppBar(automaticallyImplyLeading: true),
+            appBar: const HomeScreenAppBar(automaticallyImplyLeading: true,
+            cartNumber: 0,
+            ),
             body: Padding(
               padding: const EdgeInsets.all(AppPadding.p16),
               child: Column(

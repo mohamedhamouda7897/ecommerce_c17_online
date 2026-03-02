@@ -3,9 +3,6 @@ import 'package:ecommerce_c17_online/core/resources/constants_manager.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
-
-
-
 @lazySingleton
 class ApiManager {
   late Dio dio;
@@ -25,7 +22,6 @@ class ApiManager {
       ),
     );
 
-
     dio.interceptors.add(
       PrettyDioLogger(
         request: true,
@@ -39,17 +35,28 @@ class ApiManager {
   }
 
   Future<Response> get(
-      String url, {
-        Map<String, dynamic>? queryParameters,
-      }) async {
-    return await dio.get(url, queryParameters: queryParameters);
+    String url, {
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+  }) async {
+    return await dio.get(
+      url,
+      queryParameters: queryParameters,
+      options: options,
+    );
   }
 
   Future<Response> post(
-      String url, {
-        dynamic data,
-        Map<String, dynamic>? queryParameters,
-      }) async {
-    return await dio.post(url, data: data, queryParameters: queryParameters);
+    String url, {
+    dynamic data,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+  }) async {
+    return await dio.post(
+      url,
+      data: data,
+      queryParameters: queryParameters,
+      options: options,
+    );
   }
 }

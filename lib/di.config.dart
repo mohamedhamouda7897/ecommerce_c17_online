@@ -23,6 +23,12 @@ import 'features/auth/domain/repository/auth_repository.dart' as _i279;
 import 'features/auth/domain/usecases/login_usecase.dart' as _i206;
 import 'features/auth/domain/usecases/signUp_usecase.dart' as _i192;
 import 'features/auth/presentation/bloc/auth_bloc.dart' as _i363;
+import 'features/cart/data/datasources/cart_ds.dart' as _i80;
+import 'features/cart/data/repo/cart_repo_impl.dart' as _i858;
+import 'features/cart/domain/repo/cart_repo.dart' as _i411;
+import 'features/cart/domain/usecases/add_to_cart.dart' as _i841;
+import 'features/cart/domain/usecases/get_cart_details.dart' as _i1049;
+import 'features/cart/presentation/bloc/cart_bloc.dart' as _i239;
 import 'features/main_layout/categories/data/ds/category_ds.dart' as _i983;
 import 'features/main_layout/categories/data/ds/category_ds_impl.dart' as _i284;
 import 'features/main_layout/categories/data/repo/category_repo_impl.dart'
@@ -42,6 +48,8 @@ import 'features/main_layout/home/domain/repo/home_repo.dart' as _i347;
 import 'features/main_layout/home/domain/usecases/get_categories_usecase.dart'
     as _i646;
 import 'features/main_layout/home/presentation/bloc/home_bloc.dart' as _i123;
+import 'features/product_details/presentation/bloc/product_details_bloc.dart'
+    as _i466;
 import 'features/products_screen/data/datasources/product_ds.dart' as _i790;
 import 'features/products_screen/data/repo/product_repo_impl.dart' as _i845;
 import 'features/products_screen/domain/repo/product_repo.dart' as _i1030;
@@ -101,21 +109,40 @@ extension GetItInjectableX on _i174.GetIt {
         gh<_i414.GetSubCategoryUseCasse>(),
       ),
     );
+    gh.factory<_i80.CartDs>(
+      () => _i80.CartDsImpl(gh<_i237.ApiManager>(), gh<_i164.CacheHelper>()),
+    );
     gh.factory<_i477.ProductBloc>(
       () => _i477.ProductBloc(gh<_i543.GetProductsUseCase>()),
     );
+    gh.factory<_i411.CartRepo>(() => _i858.CartRepoImpl(gh<_i80.CartDs>()));
     gh.factory<_i279.AuthRepository>(
       () =>
           _i674.AuthRepoImpl(gh<_i981.AuthRemoteDs>(), gh<_i164.CacheHelper>()),
-    );
-    gh.factory<_i123.HomeBloc>(
-      () => _i123.HomeBloc(gh<_i646.GetCategoriesUseCase>()),
     );
     gh.factory<_i206.LoginUseCase>(
       () => _i206.LoginUseCase(gh<_i279.AuthRepository>()),
     );
     gh.factory<_i192.SignupUseCase>(
       () => _i192.SignupUseCase(gh<_i279.AuthRepository>()),
+    );
+    gh.factory<_i841.AddToCartUseCase>(
+      () => _i841.AddToCartUseCase(gh<_i411.CartRepo>()),
+    );
+    gh.factory<_i1049.GetCartDetailsUseCase>(
+      () => _i1049.GetCartDetailsUseCase(gh<_i411.CartRepo>()),
+    );
+    gh.factory<_i123.HomeBloc>(
+      () => _i123.HomeBloc(
+        gh<_i646.GetCategoriesUseCase>(),
+        gh<_i1049.GetCartDetailsUseCase>(),
+      ),
+    );
+    gh.factory<_i466.ProductDetailsBloc>(
+      () => _i466.ProductDetailsBloc(gh<_i841.AddToCartUseCase>()),
+    );
+    gh.factory<_i239.CartBloc>(
+      () => _i239.CartBloc(gh<_i1049.GetCartDetailsUseCase>()),
     );
     gh.factory<_i363.AuthBloc>(
       () => _i363.AuthBloc(gh<_i206.LoginUseCase>(), gh<_i192.SignupUseCase>()),
