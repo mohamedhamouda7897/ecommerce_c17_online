@@ -4,6 +4,7 @@ import 'package:ecommerce_c17_online/core/caching/cache_helper.dart';
 import 'package:ecommerce_c17_online/core/routes_manager/routes.dart';
 import 'package:ecommerce_c17_online/core/routes_manager/routes.dart';
 import 'package:ecommerce_c17_online/di.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,6 +13,7 @@ import 'core/routes_manager/route_generator.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await configureDependencies();
   runApp(MainApp());
 }

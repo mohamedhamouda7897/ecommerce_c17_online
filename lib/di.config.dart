@@ -39,6 +39,15 @@ import 'features/main_layout/categories/domain/usecases/get_sub_category_usecass
     as _i414;
 import 'features/main_layout/categories/presentation/bloc/category_bloc.dart'
     as _i916;
+import 'features/main_layout/favourite/data/data_sources/wish_ds.dart' as _i658;
+import 'features/main_layout/favourite/data/repo/wish_repo_impl.dart' as _i728;
+import 'features/main_layout/favourite/domain/repo/wish_repo.dart' as _i777;
+import 'features/main_layout/favourite/domain/usecases/add_product_to_wish_list_usecase.dart'
+    as _i1072;
+import 'features/main_layout/favourite/domain/usecases/get_wish_list_use_case.dart'
+    as _i769;
+import 'features/main_layout/favourite/presentation/bloc/wish_bloc.dart'
+    as _i486;
 import 'features/main_layout/home/data/datasources/remote/home_remote_ds.dart'
     as _i150;
 import 'features/main_layout/home/data/datasources/remote/home_remote_ds_impl.dart'
@@ -116,9 +125,19 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i477.ProductBloc(gh<_i543.GetProductsUseCase>()),
     );
     gh.factory<_i411.CartRepo>(() => _i858.CartRepoImpl(gh<_i80.CartDs>()));
+    gh.factory<_i658.WishDs>(
+      () => _i658.WishDsImpl(gh<_i237.ApiManager>(), gh<_i164.CacheHelper>()),
+    );
     gh.factory<_i279.AuthRepository>(
       () =>
           _i674.AuthRepoImpl(gh<_i981.AuthRemoteDs>(), gh<_i164.CacheHelper>()),
+    );
+    gh.factory<_i777.WishRepo>(() => _i728.WishRepoImpl(gh<_i658.WishDs>()));
+    gh.factory<_i1072.AddProductToWishListUseCase>(
+      () => _i1072.AddProductToWishListUseCase(gh<_i777.WishRepo>()),
+    );
+    gh.factory<_i769.GetWishListUseCase>(
+      () => _i769.GetWishListUseCase(gh<_i777.WishRepo>()),
     );
     gh.factory<_i206.LoginUseCase>(
       () => _i206.LoginUseCase(gh<_i279.AuthRepository>()),
@@ -136,6 +155,12 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i123.HomeBloc(
         gh<_i646.GetCategoriesUseCase>(),
         gh<_i1049.GetCartDetailsUseCase>(),
+      ),
+    );
+    gh.factory<_i486.WishBloc>(
+      () => _i486.WishBloc(
+        gh<_i1072.AddProductToWishListUseCase>(),
+        gh<_i769.GetWishListUseCase>(),
       ),
     );
     gh.factory<_i466.ProductDetailsBloc>(

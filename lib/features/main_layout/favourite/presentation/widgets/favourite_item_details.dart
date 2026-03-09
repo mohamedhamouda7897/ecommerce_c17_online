@@ -2,6 +2,7 @@ import 'package:colornames/colornames.dart';
 import 'package:ecommerce_c17_online/core/resources/color_manager.dart';
 import 'package:ecommerce_c17_online/core/resources/styles_manager.dart';
 import 'package:ecommerce_c17_online/core/resources/values_manager.dart';
+import 'package:ecommerce_c17_online/features/main_layout/favourite/data/models/WishResponse.dart';
 import 'package:ecommerce_c17_online/features/main_layout/favourite/presentation/widgets/custom_txt_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,9 +10,9 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class FavouriteItemDetails extends StatelessWidget {
-  const FavouriteItemDetails({required this.product, super.key});
+   FavouriteItemDetails({required this.product, super.key});
 
-  final Map<String, dynamic> product;
+  Data product;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class FavouriteItemDetails extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         CustomTextWgt(
-          data: product["title"],
+          data: product.title??"",
           textStyle: getSemiBoldStyle(
               color: ColorManager.primaryDark, fontSize: AppSize.s18.sp),
         ),
@@ -31,10 +32,10 @@ class FavouriteItemDetails extends StatelessWidget {
               width: AppSize.s14.w,
               height: AppSize.s14.h,
               decoration: BoxDecoration(
-                  color: product["color"], shape: BoxShape.circle),
+                  color:Colors.red, shape: BoxShape.circle),
             ),
             CustomTextWgt(
-              data: (product["color"] as Color).colorName,
+              data: (Colors.red as Color).colorName,
               textStyle: getMediumStyle(
                   color: ColorManager.primaryDark, fontSize: AppSize.s14.sp),
             ),
@@ -43,14 +44,14 @@ class FavouriteItemDetails extends StatelessWidget {
         Row(
           children: [
             CustomTextWgt(
-              data: 'EGP ${product["finalPrice"]}  ',
+              data: 'EGP ${product.price}  ',
               textStyle: getSemiBoldStyle(
                       color: ColorManager.primaryDark, fontSize: AppSize.s18.sp)
                   .copyWith(
                 letterSpacing: 0.17,
               ),
             ),
-            product["salePrice"] == null
+            product.priceAfterDiscount == null
                 ? const SizedBox.shrink()
                 : Flexible(
                     child: Column(
@@ -60,7 +61,7 @@ class FavouriteItemDetails extends StatelessWidget {
                           height: AppSize.s10.h,
                         ),
                         CustomTextWgt(
-                            data: 'EGP ${product["salePrice"]}',
+                            data: 'EGP ${product.priceAfterDiscount}',
                             textStyle: getMediumStyle(
                                     color: ColorManager.appBarTitleColor
                                         .withOpacity(.6))
